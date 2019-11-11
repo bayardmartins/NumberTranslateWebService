@@ -197,6 +197,5 @@ def TradutorMilhar(num):
                 result+='mil'
     return result
 
-
 httpd = HTTPServer(('localhost', 8080), Serv)
 httpd.serve_forever()
