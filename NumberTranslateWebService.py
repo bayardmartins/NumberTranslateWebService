@@ -23,7 +23,7 @@ def Tradutor(numero):
     if(numero < 0):
         result+='menos '+ Tradutor(abs(numero)) 
     elif(numero < 20):
-        result+=TradutorUnidade(numero)
+        result+=unidade.get(numero)
     elif(numero < 100):
         result+=TradutorDezena(numero)
     elif(numero < 1000):
@@ -34,101 +34,67 @@ def Tradutor(numero):
         return 'número fora do alcance'
     return result
 
-def TradutorUnidade(numero):
-    result = ''
-    if numero == 1: 
-        result+="um"
-    elif numero == 2: 
-        result+="dois"
-    elif numero == 3:
-        result+="três"
-    elif numero == 4:
-        result+="quatro"
-    elif numero == 5:
-        result+="cinco"
-    elif numero == 6:
-        result+="seis"
-    elif numero == 7:
-        result+="sete"
-    elif numero == 8:
-        result+="oito"
-    elif numero == 9:
-        result+="nove"
-    elif numero == 10: 
-        result+="dez"
-    elif numero == 11:
-        result+="onze"
-    elif numero == 12:
-        result+="doze"
-    elif numero == 13:
-        result+="treze"
-    elif numero == 14:
-        result+="catorze"
-    elif numero == 15:
-        result+="quinze"
-    elif numero == 16:
-        result+="dezesseis"
-    elif numero == 17:
-        result+="dezessete"
-    elif numero == 18:
-        result+="dezoito"
-    elif numero == 19: 
-        result+="dezenove"
-    return result
+unidade = {
+    1: "um",
+    2: "dois",
+    3: "três",
+    4: "quatro",
+    5: "cinco",
+    6: "seis",
+    7: "sete",
+    8: "oito",
+    9: "nove",
+    10: "dez",
+    11: "onze",
+    12: "doze",
+    13: "treze",
+    14: "catorze",
+    15: "quinze",
+    16: "dezesseis",
+    17: "dezessete",
+    18: "dezoito",
+    19:  "dezenove"
+}
+
+dezena = {
+    2: 'vinte',
+    3: 'trinta',
+    4: 'quarenta',
+    5: 'cinquenta',
+    6: 'sessenta',
+    7: 'setenta',
+    8: 'oitenta',
+    9: 'noventa'
+}
+
+centena = {
+    1: 'cem',
+    2: 'duzentos',
+    3: 'trezentos',
+    4: 'quatrocentos',
+    5: 'quinhentos',
+    6: 'seissentos',
+    7: 'setecentos',
+    8: 'oitocentos',
+    9: 'novecentos'
+}
 
 def TradutorDezena(num):
     result = ""
-    x = math.ceil(int(num/10))
-    numero = math.ceil(x)
+    numero = math.ceil(int(num/10))
     if numero == 0:
-        result=TradutorUnidade(num)
+        result=unidade.get(num)
         return result
-    elif numero == 2: 
-        if num!=20:
-            result+='vinte e {}'.format(Tradutor(num-20))
-        else:
-            result+='vinte'
-    elif numero == 3:
-        if num!=30:
-            result+='trinta e {}'.format(Tradutor(num-30))
-        else:
-            result+='trinta'
-    elif numero == 4:
-        if num!=40:
-            result+='quarenta e {}'.format(Tradutor(num-40))
-        else:
-            result+='quarenta'
-    elif numero == 5:
-        if num!=50:
-            result+='cinquenta e {}'.format(Tradutor(num-50))
-        else:
-            result+='cinquenta'
-    elif numero == 6:
-        if num!=60:
-            result+='sessenta e {}'.format(Tradutor(num-60))
-        else:
-            result+='sessenta'
-    elif numero == 7:
-        if num!=70:
-            result+='setenta e {}'.format(Tradutor(num-70))
-        else:
-            result+='setenta'
-    elif numero == 8:
-        if num!=80:
-            result+='oitenta e {}'.format(Tradutor(num-80))
-        else:
-            result+='oitenta'
-    elif numero == 9:
-        if num!=90:
-            result+='noventa e {}'.format(Tradutor(num-90))
-        else:
-            result+='noventa'
+    elif num%(numero*10)==0:
+        result+=dezena.get(numero)
+        return result
+    else:
+        result+='{} e {}'.format(dezena.get(numero),Tradutor(num%(numero*10)))
     return result
 
 def TradutorCentena(num):
     result = ""
-    x = math.ceil(int(num/100))
-    numero = math.ceil(x)
+    numero = math.ceil(int(num/100))
     if numero == 0:
         result=TradutorDezena(num)
     elif numero ==1:
@@ -136,52 +102,15 @@ def TradutorCentena(num):
             result+='cento e {}'.format(Tradutor(num-100))
         else:
             result+='cem'
-    elif numero == 2: 
-        if num!=200:
-            result+='duzentos e {}'.format(Tradutor(num-200))
-        else:
-            result+='duzentos'
-    elif numero == 3:
-        if num!=300:
-            result+='trezentos e {}'.format(Tradutor(num-300))
-        else:
-            result+='trezentos'
-    elif numero == 4:
-        if num!=400:
-            result+='quatrocentos e {}'.format(Tradutor(num-400))
-        else:
-            result+='quatrocentos'
-    elif numero == 5:
-        if num!=500:
-            result+='quinhentos e {}'.format(Tradutor(num-500))
-        else:
-            result+='quinhentos'
-    elif numero == 6:
-        if num!=600:
-            result+='seissentos e {}'.format(Tradutor(num-600))
-        else:
-            result+='seissentos'
-    elif numero == 7:
-        if num!=700:
-            result+='setecentos e {}'.format(Tradutor(num-700))
-        else:
-            result+='setecentos'
-    elif numero == 8:
-        if num!=800:
-            result+='oitocentos e {}'.format(Tradutor(num-800))
-        else:
-            result+='oitocentos'
-    elif numero == 9:
-        if num!=900:
-            result+='novecentos e {}'.format(Tradutor(num-900))
-        else:
-            result+='novecentos'
+    elif(num%(numero*100)==0):
+        result+=centena.get(numero)
+    else:
+        result+='{} e {}'.format(centena.get(numero),Tradutor(num%(numero*100)))
     return result
 
 def TradutorMilhar(num):
     result = ""
-    x = math.ceil(int(num/1000))
-    numero = math.ceil(x)
+    numero = math.ceil(int(num/1000))
     if numero == 0:
         result=TradutorCentena(num)
     else:
